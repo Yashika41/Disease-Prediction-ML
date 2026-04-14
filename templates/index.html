@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Disease Prediction | Yashika Sharma</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .container {
+      background: white;
+      border-radius: 20px;
+      padding: 40px;
+      max-width: 600px;
+      width: 100%;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+    }
+
+    h1 {
+      text-align: center;
+      color: #333;
+      font-size: 1.8rem;
+      margin-bottom: 8px;
+    }
+
+    .subtitle {
+      text-align: center;
+      color: #888;
+      font-size: 0.9rem;
+      margin-bottom: 30px;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+    }
+
+    label {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #555;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .hint {
+      font-size: 0.7rem;
+      color: #aaa;
+      font-weight: normal;
+      text-transform: none;
+    }
+
+    input[type="number"] {
+      padding: 10px 14px;
+      border: 2px solid #e0e0e0;
+      border-radius: 10px;
+      font-size: 1rem;
+      transition: border-color 0.2s;
+      outline: none;
+    }
+
+    input[type="number"]:focus {
+      border-color: #667eea;
+    }
+
+    button {
+      width: 100%;
+      padding: 14px;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: opacity 0.2s, transform 0.1s;
+    }
+
+    button:hover  { opacity: 0.9; transform: translateY(-1px); }
+    button:active { transform: translateY(0); }
+
+    .result {
+      margin-top: 24px;
+      padding: 20px;
+      border-radius: 12px;
+      text-align: center;
+      font-size: 1.2rem;
+      font-weight: 600;
+    }
+
+    .result.success {
+      background: #e8f5e9;
+      color: #2e7d32;
+      border: 2px solid #a5d6a7;
+    }
+
+    .result.danger {
+      background: #ffebee;
+      color: #c62828;
+      border: 2px solid #ef9a9a;
+    }
+
+    .result.error {
+      background: #fff3e0;
+      color: #e65100;
+      border: 2px solid #ffcc80;
+    }
+
+    .confidence {
+      font-size: 0.9rem;
+      font-weight: normal;
+      margin-top: 6px;
+      opacity: 0.8;
+    }
+
+    .note {
+      margin-top: 16px;
+      font-size: 0.75rem;
+      color: #aaa;
+      text-align: center;
+    }
+
+    @media (max-width: 480px) {
+      .form-grid { grid-template-columns: 1fr; }
+      h1 { font-size: 1.4rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <h1>🩺 Diabetes Risk Predictor</h1>
+    <p class="subtitle">Enter your health details below for an AI-based risk assessment</p>
+
+    <form action="/predict" method="POST">
+      <div class="form-grid">
+
+        <div class="form-group">
+          <label>Pregnancies <span class="hint">(0 if male)</span></label>
+          <input type="number" name="pregnancies" min="0" max="20" step="1" placeholder="e.g. 2" required />
+        </div>
+
+        <div class="form-group">
+          <label>Glucose <span class="hint">(mg/dL)</span></label>
+          <input type="number" name="glucose" min="0" max="300" step="1" placeholder="e.g. 120" required />
+        </div>
+
+        <div class="form-group">
+          <label>Blood Pressure <span class="hint">(mm Hg)</span></label>
+          <input type="number" name="blood_pressure" min="0" max="200" step="1" placeholder="e.g. 70" required />
+        </div>
+
+        <div class="form-group">
+          <label>Skin Thickness <span class="hint">(mm)</span></label>
+          <input type="number" name="skin_thickness" min="0" max="100" step="1" placeholder="e.g. 20" required />
+        </div>
+
+        <div class="form-group">
+          <label>Insulin <span class="hint">(μU/mL)</span></label>
+          <input type="number" name="insulin" min="0" max="900" step="1" placeholder="e.g. 80" required />
+        </div>
+
+        <div class="form-group">
+          <label>BMI <span class="hint">(kg/m²)</span></label>
+          <input type="number" name="bmi" min="0" max="70" step="0.1" placeholder="e.g. 28.5" required />
+        </div>
+
+        <div class="form-group">
+          <label>Diabetes Pedigree <span class="hint">(family history score)</span></label>
+          <input type="number" name="dpf" min="0" max="3" step="0.01" placeholder="e.g. 0.45" required />
+        </div>
+
+        <div class="form-group">
+          <label>Age <span class="hint">(years)</span></label>
+          <input type="number" name="age" min="1" max="120" step="1" placeholder="e.g. 25" required />
+        </div>
+
+      </div>
+
+      <button type="submit">🔍 Predict Risk</button>
+    </form>
+
+    {% if result %}
+    <div class="result {{ result_class }}">
+      {{ result }}
+      {% if confidence %}
+      <div class="confidence">Confidence: {{ confidence }}</div>
+      {% endif %}
+    </div>
+    {% endif %}
+
+    <p class="note">⚠️ This tool is for educational purposes only and is not a substitute for professional medical advice.</p>
+
+  </div>
+</body>
+</html>
