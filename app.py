@@ -6,6 +6,9 @@
 from flask import Flask, render_template, request
 import numpy as np
 import pickle
+import os
+model_path = os.path.join(os.path.dirname(__file__), 'model.pkl')
+model = pickle.load(open(model_path, 'rb'))
 
 app = Flask(__name__)
 
