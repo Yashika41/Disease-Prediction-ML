@@ -104,6 +104,19 @@ Then open your browser and go to: **http://localhost:5000**
 
 ---
 
+## 📊 Project Visualizations[[1](https://www.google.com/url?sa=E&q=https%3A%2F%2Fgithub.com%2FYashika41%2FDisease-Prediction-ML)]
+
+### Confusion Matrix
+![Confusion Matrix](confusion_matrix.png)
+
+### Correlation Heatmap
+![Correlation Heatmap](correlation_heatmap.png)
+
+### Data Distribution
+![Diabetes Distribution](diabetes_distribution.png)
+
+---
+
 ## 🛠️ Tech Stack
 
 - **Python** — Core language
