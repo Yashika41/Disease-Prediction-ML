@@ -7,14 +7,15 @@ from flask import Flask, render_template, request
 import numpy as np
 import pickle
 import os
-model_path = os.path.join(os.path.dirname(__file__), 'model.pkl')
-model = pickle.load(open(model_path, 'rb'))
 
 app = Flask(__name__)
 
 # Load the saved model and scaler
-model  = pickle.load(open('model.pkl', 'rb'))
-scaler = pickle.load(open('scaler.pkl', 'rb'))
+import os
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+with open(os.path.join(BASE_DIR, 'pipeline.pkl'), 'rb') as f:
+    pipeline = pickle.load(f)
+
 
 @app.route('/')
 def home():
@@ -37,9 +38,8 @@ def predict():
 
         # Scale and predict
         input_array  = np.array([features])
-        input_scaled = scaler.transform(input_array)
-        prediction   = model.predict(input_scaled)[0]
-        probability  = model.predict_proba(input_scaled)[0]
+        prediction  = pipeline.predict(input_array)[0]
+        probability = pipeline.predict_proba(input_array)[0]
 
         if prediction == 1:
             result      = "⚠️ High Risk of Diabetes"
@@ -59,5 +59,7 @@ def predict():
         return render_template('index.html', result=f"Error: {str(e)}", result_class="error")
 
 
+import os
 if __name__ == '__main__':
-    app.run(debug=True)
+    debug = os.environ.get('FLASK_DEBUG', '0') == '1'
+    app.run(host='0.0.0.0', port=5000, debug=debug)
