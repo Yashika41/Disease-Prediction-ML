@@ -94,13 +94,12 @@ Then open your browser and go to: **http://localhost:5000**
 ---
 
 ## 📈 Model Performance
-
-| Model | Accuracy |
+| Metric | Score |
 |---|---|
-| Logistic Regression | ~77% |
-| Random Forest | ~79% |
-
-*(Actual results may vary slightly)*
+| Precision | 0.660 |
+| Recall | 0.574 ← clinically most important |
+| F1 Score | 0.623 ± 0.022 (5-fold CV) |
+| ROC-AUC | 0.811 |
 
 ---
 
