@@ -24,6 +24,9 @@ FEATURE_NAMES = ['Pregnancies', 'Glucose', 'BloodPressure',
                  'SkinThickness', 'Insulin', 'BMI',
                  'DiabetesPedigreeFunction', 'Age']
 
+@app.route('/health')
+def health():
+    return {'status': 'ok', 'model': 'loaded'}, 200
 @app.route('/')
 def home():
     return render_template('index.html')
