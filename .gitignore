@@ -1,4 +1,7 @@
-venv/
+pipeline.pkl
+diabetes.csv
 __pycache__/
 *.pyc
-.DS_Store
+.env
+venv/
+*.png
