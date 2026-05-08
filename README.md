@@ -96,10 +96,10 @@ Then open your browser and go to: **http://localhost:5000**
 ## 📈 Model Performance
 | Metric | Score |
 |---|---|
-| Precision | 0.660 |
-| Recall | 0.574 ← clinically most important |
-| F1 Score | 0.623 ± 0.022 (5-fold CV) |
+| Accuracy | 75% |
 | ROC-AUC | 0.811 |
+| Recall (Diabetes) | 0.57 |
+| F1 Score | 0.61 |
 
 ---
 
