@@ -1,7 +1,9 @@
-pipeline.pkl
 diabetes.csv
+pipeline.pkl
+*.pkl
+*.csv
 __pycache__/
 *.pyc
 .env
 venv/
-*.png
+archive.zip
