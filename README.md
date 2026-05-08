@@ -105,7 +105,10 @@ Then open your browser and go to: **http://localhost:5000**
 
 ## 📊 Project Visualizations[[1](https://www.google.com/url?sa=E&q=https%3A%2F%2Fgithub.com%2FYashika41%2FDisease-Prediction-ML)]
 
-### Confusion Matrix
+## 📊 Feature Importance (SHAP)
+![SHAP Feature Importance](shap_importance.png)
+
+## 📊 Confusion Matrix
 ![Confusion Matrix](confusion_matrix.png)
 
 ### Correlation Heatmap

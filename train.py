@@ -8,6 +8,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 import pickle
+import shap
 import os
 
 from sklearn.pipeline import Pipeline
@@ -169,9 +170,41 @@ def evaluate(pipeline: Pipeline, X_test, y_test,
         'cv_auc'    : f"{cv_auc.mean():.3f} ± {cv_auc.std():.3f}"
     }
 
+# ============================================================
+# FUNCTION 6 — SHAP Feature Importance Plot
+# ============================================================
+def shap_plot(pipeline: Pipeline, X_train) -> None:
+    """Generate SHAP feature importance plot."""
+    print("\n📊 Generating SHAP feature importance plot...")
+
+    # Get the trained model from pipeline
+    rf_model = pipeline.named_steps['model']
+
+    # Transform training data through imputer + scaler only
+    X_train_transformed = pipeline[:-1].transform(X_train)
+
+    # Create SHAP explainer
+    explainer   = shap.TreeExplainer(rf_model)
+    shap_values = explainer.shap_values(X_train_transformed)
+
+    # Plot — use index 1 for Diabetes class
+    plt.figure()
+    shap.summary_plot(
+        shap_values[:, :, 1] if len(
+            np.array(shap_values).shape) == 3 else shap_values[1],
+        X_train_transformed,
+        feature_names=FEATURE_NAMES,
+        show=False
+    )
+    plt.title('Feature Importance — SHAP Values')
+    plt.tight_layout()
+    plt.savefig(os.path.join(BASE_DIR, 'shap_importance.png'),
+                bbox_inches='tight', dpi=150)
+    plt.close()
+    print("✅ SHAP plot saved as shap_importance.png!")
 
 # ============================================================
-# FUNCTION 6 — Save Artifacts
+# FUNCTION 7 — Save Artifacts
 # ============================================================
 def save_artifacts(pipeline: Pipeline) -> None:
     """Save trained pipeline to disk."""
@@ -202,7 +235,10 @@ if __name__ == '__main__':
     # Step 5 — Evaluate
     metrics = evaluate(pipeline, X_test, y_test, X, y)
 
-    # Step 6 — Save
+    # Step 6 — SHAP plot
+    shap_plot(pipeline, X_train)
+
+    # Step 7 — Save
     save_artifacts(pipeline)
 
     print("\n" + "=" * 50)
