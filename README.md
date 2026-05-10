@@ -5,6 +5,11 @@ A machine learning web application that predicts diabetes risk based on health p
 
 ---
 
+## 🖥️ App Screenshot
+![App Screenshot](App_screenshot.png)
+
+---
+
 ## 📁 Project Structure
 
 ```
