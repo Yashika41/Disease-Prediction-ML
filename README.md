@@ -131,6 +131,35 @@ Then open your browser and go to: **http://localhost:5000**
 
 ---
 
+## 🔌 API Endpoints
+
+| Endpoint | Method | Description |
+|---|---|---|
+| `/` | GET | Home page with prediction form |
+| `/predict` | POST | Submit health data, get prediction |
+| `/health` | GET | Health check — returns `{"status": "ok"}` |
+
+---
+
+## ⚠️ Dataset Bias & Limitations
+
+This model was trained on the **Pima Indians Diabetes Database** which has
+important limitations:
+
+- Data collected from **female Pima Indian patients aged 21+** only
+- Model will perform **worse** on males, children, and non-Pima populations
+- The form shows *"Pregnancies (0 if male)"* — this is misleading.
+  The model was NOT trained on male data
+- Dataset is from **1988** — medical standards may have changed
+- Always consult a qualified medical professional for health decisions
+
+---
+
+## 🐍 Python Version
+This project was built and tested with **Python 3.14**
+
+---
+
 ## 👩‍💻 Developer
 
 **Yashika Sharma**
