@@ -43,7 +43,7 @@ def predict():
             if field not in request.form or request.form[field] == '':
                 return render_template('index.html',
                     result=f"⚠️ Please fill in all fields.",
-                    result_class="error")
+                    result_class="error",form_data=request.form)
 
         # Get values from form
         values = [float(request.form[f]) for f in form_fields]
@@ -56,15 +56,15 @@ def predict():
         if not (0 <= glucose <= 300):
             return render_template('index.html',
                 result="⚠️ Glucose must be between 0 and 300",
-                result_class="error")
+                result_class="error",form_data=request.form)
         if not (0 <= bmi <= 70):
             return render_template('index.html',
                 result="⚠️ BMI must be between 0 and 70",
-                result_class="error")
+                result_class="error",form_data=request.form)
         if not (1 <= age <= 120):
             return render_template('index.html',
                 result="⚠️ Age must be between 1 and 120",
-                result_class="error")
+                result_class="error",form_data=request.form)
 
         # Create DataFrame with correct column names (fixes the warning!)
         input_df = pd.DataFrame([values], columns=FEATURE_NAMES)
@@ -83,14 +83,25 @@ def predict():
         confidence = f"{max(probability)*100:.1f}%"
 
         return render_template('index.html',
-                               result=result,
-                               result_class=result_class,
-                               confidence=confidence)
+                       result=result,
+                       result_class=result_class,
+                       confidence=confidence,
+                       form_data={
+                           'pregnancies':    request.form.get('pregnancies', ''),
+                           'glucose':        request.form.get('glucose', ''),
+                           'blood_pressure': request.form.get('blood_pressure', ''),
+                           'skin_thickness': request.form.get('skin_thickness', ''),
+                           'insulin':        request.form.get('insulin', ''),
+                           'bmi':            request.form.get('bmi', ''),
+                           'dpf':            request.form.get('dpf', ''),
+                           'age':            request.form.get('age', '')
+                       })
 
     except ValueError:
         return render_template('index.html',
-            result="⚠️ Please enter valid numbers in all fields.",
-            result_class="error")
+    result=f"⚠️ Please fill in all fields.",
+    result_class="error",
+    form_data=request.form)
 
 if __name__ == '__main__':
     # Safe debug mode — reads from environment variable

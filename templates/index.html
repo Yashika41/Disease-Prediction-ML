@@ -14,35 +14,35 @@
       <div class="form-grid">
         <div class="form-group">
           <label>Pregnancies <span class="hint">(0 if male)</span></label>
-          <input type="number" name="pregnancies" min="0" max="20" step="1" placeholder="e.g. 2" required />
+          <input type="number" name="pregnancies" min="0" max="20" step="1" placeholder="e.g. 2" value="{{ form_data.get('pregnancies', '') if form_data else '' }}" required />
         </div>
         <div class="form-group">
           <label>Glucose <span class="hint">(mg/dL)</span></label>
-          <input type="number" name="glucose" min="1" max="300" step="1" placeholder="e.g. 120" required />
+          <input type="number" name="glucose" min="1" max="300" step="1" placeholder="e.g. 120" value="{{ form_data.get('glucose', '') if form_data else '' }}" required />
         </div>
         <div class="form-group">
           <label>Blood Pressure <span class="hint">(mm Hg)</span></label>
-          <input type="number" name="blood_pressure" min="1" max="200" step="1" placeholder="e.g. 70" required />
+          <input type="number" name="blood_pressure" min="1" max="200" step="1" placeholder="e.g. 70" value="{{ form_data.get('blood_pressure', '') if form_data else '' }}" required />
         </div>
         <div class="form-group">
           <label>Skin Thickness <span class="hint">(mm)</span></label>
-          <input type="number" name="skin_thickness" min="1" max="100" step="1" placeholder="e.g. 20" required />
+          <input type="number" name="skin_thickness" min="1" max="100" step="1" placeholder="e.g. 20" value="{{ form_data.get('skin_thickness', '') if form_data else '' }}" required />
         </div>
         <div class="form-group">
           <label>Insulin <span class="hint">(μU/mL)</span></label>
-          <input type="number" name="insulin" min="1" max="900" step="1" placeholder="e.g. 80" required />
+          <input type="number" name="insulin" min="1" max="900" step="1" placeholder="e.g. 80" value="{{ form_data.get('insulin', '') if form_data else '' }}" required />
         </div>
         <div class="form-group">
           <label>BMI <span class="hint">(kg/m²)</span></label>
-          <input type="number" name="bmi" min="1" max="70" step="0.1" placeholder="e.g. 28.5" required />
+          <input type="number" name="bmi" min="1" max="70" step="0.1" placeholder="e.g. 28.5" value="{{ form_data.get('bmi', '') if form_data else '' }}" required />
         </div>
         <div class="form-group">
           <label>Diabetes Pedigree <span class="hint">(family score)</span></label>
-          <input type="number" name="dpf" min="0.01" max="3" step="0.01" placeholder="e.g. 0.45" required />
+          <input type="number" name="dpf" min="0.01" max="3" step="0.01" placeholder="e.g. 0.45" value="{{ form_data.get('dpf', '') if form_data else '' }}" required />
         </div>
         <div class="form-group">
           <label>Age <span class="hint">(years)</span></label>
-          <input type="number" name="age" min="1" max="120" step="1" placeholder="e.g. 25" required />
+          <input type="number" name="age" min="1" max="120" step="1" placeholder="e.g. 25" value="{{ form_data.get('age', '') if form_data else '' }}" required />
         </div>
       </div>
       <div class="disclaimer-box">
