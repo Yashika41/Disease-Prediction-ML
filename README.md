@@ -1,12 +1,11 @@
 # 🩺 Disease Prediction ML Web App
+
+## 🖥️ App Preview
+![Diabetes Risk Predictor](app_screenshot.png)
+
 ### Built by Yashika Sharma | github.com/Yashika41
 
 A machine learning web application that predicts diabetes risk based on health parameters, built using Python, Scikit-learn, and Flask.
-
----
-
-## 🖥️ App Screenshot
-![App Screenshot](c:\Users\hp\OneDrive\Pictures\App_screenshot.png)
 
 ---
 
