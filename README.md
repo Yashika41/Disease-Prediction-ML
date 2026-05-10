@@ -6,7 +6,7 @@ A machine learning web application that predicts diabetes risk based on health p
 ---
 
 ## 🖥️ App Screenshot
-![App Screenshot](App_screenshot.png)
+![App Screenshot](c:\Users\hp\OneDrive\Pictures\App_screenshot.png)
 
 ---
 
